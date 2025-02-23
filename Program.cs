@@ -44,6 +44,11 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
     app.MapOpenApi();
 }
+
+// Always map Scalar API, even in production
+app.MapScalarApiReference();
+app.MapOpenApi();
+
 app.UseWebSockets();  // ✅ Enable WebSockets
 
 app.UseHttpsRedirection();
@@ -51,4 +56,7 @@ app.MapControllers();
 app.MapHub<OnlineAccountHub>("/onlineaccounts-hub");
 app.MapHub<ActiveCounterHub>("/activecounter-hub");
 
+app.MapGet("/", () => "Backend API is running!");
+
+//app.Run();
 app.Run();
